@@ -1,33 +1,57 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 )
 
+type Value struct {
+	V int64
+	S string
+}
+
 func main() {
+	nums := []int64{
+		36028797018963970,
+		36028797018963969,
+		36028797018963968,
+		36028797018963967,
+		36028797018963966,
+		36028797018963965,
+		36028797018963964,
+		36028797018963963,
+		36028797018963962,
+		36028797018963961,
+		36028797018963960,
+		36028797018963959,
+		36028797018963958,
+		36028797018963957,
+		36028797018963956,
+		36028797018963955,
+		36028797018963954,
+		36028797018963953,
+		36028797018963952,
+		36028797018963951,
+		36028797018963950,
+		36028797018963859,
+		26028797018963969}
+
 	for {
-		fmt.Printf("%d\n", uint64(36028797018963970))
-		fmt.Printf("%d\n", uint64(36028797018963969))
-		fmt.Printf("%d\n", uint64(36028797018963968))
-		fmt.Printf("%d\n", uint64(36028797018963967))
-		fmt.Printf("%d\n", uint64(36028797018963966))
-		fmt.Printf("%d\n", uint64(36028797018963965))
-		fmt.Printf("%d\n", uint64(36028797018963964))
-		fmt.Printf("%d\n", uint64(36028797018963963))
-		fmt.Printf("%d\n", uint64(36028797018963962))
-		fmt.Printf("%d\n", uint64(36028797018963961))
-		fmt.Printf("%d\n", uint64(36028797018963960))
-		fmt.Printf("%d\n", uint64(36028797018963959))
-		fmt.Printf("%d\n", uint64(36028797018963958))
-		fmt.Printf("%d\n", uint64(36028797018963957))
-		fmt.Printf("%d\n", uint64(36028797018963956))
-		fmt.Printf("%d\n", uint64(36028797018963955))
-		fmt.Printf("%d\n", uint64(36028797018963954))
-		fmt.Printf("%d\n", uint64(36028797018963953))
-		fmt.Printf("%d\n", uint64(36028797018963952))
-		fmt.Printf("%d\n", uint64(36028797018963951))
-		fmt.Printf("%d\n", uint64(36028797018963950))
-		fmt.Printf("%d\n", uint64(36028797018963859))
-		fmt.Printf("%d\n", uint64(26028797018963969))
+		for _, num := range nums {
+			log(num)
+		}
 	}
+}
+
+func log(num int64) {
+	v := Value{
+		V: num,
+		S: string(num),
+	}
+	j, err := json.Marshal(v)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf("%d\n", uint64(num))
+	fmt.Println(string(j))
 }
