@@ -5,5 +5,7 @@ import (
 )
 
 func main() {
-	fmt.Printf("%d\n", uint64(36028797018963968))
+	for {
+		fmt.Printf("%d\n", uint64(36028797018963968))
+	}
 }
