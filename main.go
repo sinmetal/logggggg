@@ -46,7 +46,7 @@ func main() {
 func log(num int64) {
 	v := Value{
 		V: num,
-		S: string(num),
+		S: fmt.Sprint(num),
 	}
 	j, err := json.Marshal(v)
 	if err != nil {
