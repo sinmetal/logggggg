@@ -6,8 +6,9 @@ import (
 )
 
 type Value struct {
-	Num  int64
-	Text string
+	Label string
+	Num   int64
+	Text  string
 }
 
 func main() {
@@ -45,8 +46,9 @@ func main() {
 
 func log(num int64) {
 	v := Value{
-		Num:  num,
-		Text: fmt.Sprint(num),
+		Label: "36028797018963960",
+		Num:   num,
+		Text:  fmt.Sprint(num),
 	}
 	j, err := json.Marshal(v)
 	if err != nil {
