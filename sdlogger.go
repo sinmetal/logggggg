@@ -29,7 +29,7 @@ func (l *SDLogger) Write() {
 	logger := l.c.Logger(uuid.New().String())
 	defer func() {
 		if err := logger.Flush(); err != nil {
-			log.Printf("logging.Flush: %v\n")
+			log.Printf("logging.Flush: %v\n", err)
 		}
 	}()
 
