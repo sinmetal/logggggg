@@ -4,11 +4,13 @@ go 1.12
 
 require (
 	cloud.google.com/go/bigquery v1.4.0 // indirect
+	cloud.google.com/go/logging v1.0.0 // indirect
 	dmitri.shuralyov.com/gpu/mtl v0.0.0-20191203043605-d42048ed14fd // indirect
 	github.com/cncf/udpa/go v0.0.0-20191230090109-edbea6a78f6d // indirect
 	github.com/creack/pty v1.1.9 // indirect
 	github.com/envoyproxy/go-control-plane v0.9.2 // indirect
 	github.com/golang/mock v1.4.0 // indirect
+	github.com/google/uuid v1.1.1 // indirect
 	github.com/hashicorp/golang-lru v0.5.4 // indirect
 	github.com/kr/pretty v0.2.0 // indirect
 	github.com/kr/pty v1.1.8 // indirect

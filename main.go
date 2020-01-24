@@ -1,11 +1,14 @@
 package main
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"log"
 	"os"
 	"time"
+
+	"github.com/sinmetal/gcpmetadata"
 )
 
 type Value struct {
@@ -15,6 +18,13 @@ type Value struct {
 }
 
 func main() {
+	ctx := context.Background()
+
+	projectID, err := gcpmetadata.GetProjectID()
+	if err != nil {
+		panic(err)
+	}
+
 	logger, err := NewLogger("sample", 0)
 	if err != nil {
 		panic(err)
@@ -24,6 +34,10 @@ func main() {
 			log.New(os.Stderr, "", 0).Printf("failed logger.Close() err=%v\n", err)
 		}
 	}()
+	sdlogger, err := NewSDLogger(ctx, projectID)
+	if err != nil {
+		panic(err)
+	}
 
 	nums := []int64{
 		36028797018963970,
@@ -55,6 +69,7 @@ func main() {
 			output(num)
 		}
 		logger.WriteString("world")
+		sdlogger.Write()
 		time.Sleep(6 * time.Second)
 	}
 }
