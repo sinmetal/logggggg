@@ -3,6 +3,9 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"log"
+	"os"
+	"time"
 )
 
 type Value struct {
@@ -12,6 +15,16 @@ type Value struct {
 }
 
 func main() {
+	logger, err := NewLogger("sample", 0)
+	if err != nil {
+		panic(err)
+	}
+	defer func() {
+		if err := logger.Close(); err != nil {
+			log.New(os.Stderr, "", 0).Printf("failed logger.Close() err=%v\n", err)
+		}
+	}()
+
 	nums := []int64{
 		36028797018963970,
 		36028797018963969,
@@ -39,12 +52,14 @@ func main() {
 
 	for {
 		for _, num := range nums {
-			log(num)
+			output(num)
 		}
+		logger.WriteString("world")
+		time.Sleep(6 * time.Second)
 	}
 }
 
-func log(num int64) {
+func output(num int64) {
 	v := Value{
 		Label: "36028797018963960",
 		Num:   num,
