@@ -69,7 +69,10 @@ func main() {
 			output(num)
 		}
 		logger.WriteString("world")
-		sdlogger.Write()
+
+		now := time.Now()
+		sdlogger.WriteDebug(now)
+		sdlogger.WriteGreat(now)
 		time.Sleep(6 * time.Second)
 	}
 }

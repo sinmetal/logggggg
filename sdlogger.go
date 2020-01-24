@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"log"
+	"time"
 
 	"cloud.google.com/go/logging"
 )
@@ -23,7 +24,7 @@ func NewSDLogger(ctx context.Context, projectID string) (*SDLogger, error) {
 	return &SDLogger{projectID: projectID, c: client}, nil
 }
 
-func (l *SDLogger) Write() {
+func (l *SDLogger) WriteDebug(now time.Time) {
 	logger := l.c.Logger("logggggg/debug")
 	defer func() {
 		if err := logger.Flush(); err != nil {
@@ -33,8 +34,33 @@ func (l *SDLogger) Write() {
 	}()
 
 	logger.Log(logging.Entry{
-		Payload: struct{ Anything string }{
+		Payload: struct {
+			Anything string
+			Now      time.Time
+		}{
 			Anything: "The payload can be any type!",
+			Now:      now,
+		},
+		Severity: logging.Debug,
+	})
+}
+
+func (l *SDLogger) WriteGreat(now time.Time) {
+	logger := l.c.Logger("logggggg/great")
+	defer func() {
+		if err := logger.Flush(); err != nil {
+			log.Printf("logging.Flush: %v\n", err)
+		}
+		log.Println("logging api: Flush")
+	}()
+
+	logger.Log(logging.Entry{
+		Payload: struct {
+			Great string
+			Now   time.Time
+		}{
+			Great: "Greeeeeeeeeeeeeeeeeeeeeeat!!!",
+			Now:   now,
 		},
 		Severity: logging.Debug,
 	})
