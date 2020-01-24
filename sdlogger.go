@@ -29,6 +29,7 @@ func (l *SDLogger) Write() {
 		if err := logger.Flush(); err != nil {
 			log.Printf("logging.Flush: %v\n", err)
 		}
+		log.Println("logging api: Flush")
 	}()
 
 	logger.Log(logging.Entry{
