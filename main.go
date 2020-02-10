@@ -25,7 +25,7 @@ func run(ctx context.Context) {
 
 	msg := &MessageV1{
 		LogKindName: "Sample",
-		Version:     "v1.0.0",
+		Version:     "v1.0.1",
 		Body:        "Hello World",
 	}
 	LogMessageV1(ctx, msg)
