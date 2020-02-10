@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: logtest-dep
+  labels:
+    app: logtest-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: logtest-dep
+  template:
+    metadata:
+      labels:
+        app: logtest-dep
+    spec:
+      containers:
+        - name: logtest-dep
+          image: gcr.io/$PROJECT_ID/sinmetal/logtest/master
