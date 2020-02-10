@@ -1,5 +1,5 @@
-FROM alpine:3.8
+FROM alpine:3.10
 RUN apk add --no-cache ca-certificates
 RUN mkdir /lib64 && ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2
-COPY gopath/bin/logtest /logtest
-CMD ["/logtest"]
+COPY ./logtest /logtest
+ENTRYPOINT ["/logtest"]
