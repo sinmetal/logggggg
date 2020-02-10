@@ -1,25 +1,25 @@
 steps:
 - name: 'gcr.io/cloud-builders/go'
   args: ['test', './...']
-  env: ['PROJECT_ROOT=github.com/sinmetal/logggggg']
+  env: ['PROJECT_ROOT=github.com/sinmetal/logtest']
 - name: 'gcr.io/cloud-builders/go'
-  args: ['install', '-a', '-ldflags', '-s', '-installsuffix', 'cgo', 'github.com/sinmetal/logggggg']
+  args: ['install', '-a', '-ldflags', '-s', '-installsuffix', 'cgo', 'github.com/sinmetal/logtest']
   env: [
-    'PROJECT_ROOT=github.com/sinmetal/logggggg',
+    'PROJECT_ROOT=github.com/sinmetal/logtest',
     'CGO_ENABLED=0',
     'GOOS=linux'
   ]
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '--tag=gcr.io/$PROJECT_ID/sinmetal/logggggg/$BRANCH_NAME:$COMMIT_SHA', '.']
+  args: ['build', '--tag=gcr.io/$PROJECT_ID/sinmetal/logtest/$BRANCH_NAME:$COMMIT_SHA', '.']
 - name: 'gcr.io/cloud-builders/docker'
-  args: ["push", "gcr.io/$PROJECT_ID/sinmetal/logggggg/$BRANCH_NAME:$COMMIT_SHA"]
+  args: ["push", "gcr.io/$PROJECT_ID/sinmetal/logtest/$BRANCH_NAME:$COMMIT_SHA"]
 - name: 'gcr.io/cloud-builders/kubectl'
   args:
     - set
     - image
-    - deployment/logggggg-node
-    - logggggg-node=gcr.io/$PROJECT_ID/sinmetal/logggggg/$BRANCH_NAME:$COMMIT_SHA
+    - deployment/logtest-node
+    - logtest-node=gcr.io/$PROJECT_ID/sinmetal/logtest/$BRANCH_NAME:$COMMIT_SHA
   env:
     - 'CLOUDSDK_COMPUTE_ZONE=us-central1-f'
     - 'CLOUDSDK_CONTAINER_CLUSTER=metal-tile'
-images: ['gcr.io/$PROJECT_ID/sinmetal/logggggg/$BRANCH_NAME:$COMMIT_SHA']
+images: ['gcr.io/$PROJECT_ID/sinmetal/logtest/$BRANCH_NAME:$COMMIT_SHA']
