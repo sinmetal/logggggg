@@ -2,6 +2,8 @@ package main
 
 import (
 	"context"
+	"fmt"
+	"math/rand"
 	"time"
 )
 
@@ -21,6 +23,9 @@ func main() {
 }
 
 func run(ctx context.Context) {
+	fmt.Println("Start Run")
+	defer fmt.Println("End Run")
+
 	outputBigNumber()
 
 	msg := &MessageV1{
@@ -29,4 +34,15 @@ func run(ctx context.Context) {
 		Body:        "Hello World",
 	}
 	LogMessageV1(ctx, msg)
+
+	LogAmbiguousType()
+	LogBigMap()
+	LogKV()
+	LogMultiMap()
+	LogParentChildren()
+	LogDimensionalArrays()
+
+	if rand.Intn(1000000) < 10 {
+		LogMiracle()
+	}
 }
